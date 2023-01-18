@@ -1,30 +1,51 @@
-import imp
-from django.http import HttpResponse
+from django.shortcuts import render
+
+# Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import RegisterForm
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import UserRegisterForm
 
+
+########### register here #####################################
 def register(request):
-    if request.method == 'GET':
-        form  = RegisterForm()
-        context = {'form': form}
-        return render(request, 'users/register.html', context)
-    if request.method == 'POST':
-        form  = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for ' + user)
-            return redirect('home_page')
-        else:
-            print('Form is not valid')
-            messages.error(request, 'Error Processing Your Request')
-            context = {'form': form}
-        return render(request, 'users/register.html', context)
-        return render(request, 'users/register.html', {})
+	if request.method == 'POST':
+		form = UserRegisterForm(request.POST)
+		if form.is_valid():
+			form.save()
+			username = form.cleaned_data.get('username')
+			email = form.cleaned_data.get('email')
+			######################### mail system ####################################
+			#htmly = get_template('user/Email.html')
+			#d = { 'username': username }
+			#subject, from_email, to = 'welcome', 'your_email@gmail.com', email
+			#html_content = htmly.render(d)
+			#msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+			#msg.attach_alternative(html_content, "text/html")
+			#msg.send()
+			##################################################################
+			messages.success(request, f'Your account has been created ! You are now able to log in')
+			return redirect('login')
+	else:
+		form = UserRegisterForm()
+	return render(request, 'users/register.html', {'form': form, 'title':'register here'})
 
-@login_required        
-def profile(request):
-    return render(request, 'users/profile.html')
-       
+################ login forms###################################################
+def Login(request):
+	if request.method == 'POST':
+
+		# AuthenticationForm_can_also_be_used__
+
+		username = request.POST['username']
+		password = request.POST['password']
+		user = authenticate(request, username = username, password = password)
+		if user is not None:
+			form = login(request, user)
+			messages.success(request, f' welcome {username} !!')
+			return redirect('homepage')
+		else:
+			messages.info(request, f'account done not exit plz sign in')
+	form = AuthenticationForm()
+	return render(request, 'users/login.html', {'form':form})

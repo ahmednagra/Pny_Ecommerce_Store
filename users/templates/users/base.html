@@ -3,7 +3,8 @@
 {% load static %}
 <head>
     <meta charset="utf-8">
-    <title>EShopper</title>
+    
+    <title>{% block title %}Home{% endblock %}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -25,35 +26,31 @@
     <link href="{% static 'css/style.css' %} " rel="stylesheet">
 </head>
 
-<body> 
-    <!-- Topbar Start -->
+<body>
+    <!-- Topbar Start 
     <div class="container-fluid">
        {% include "baseapp/topbar.html" %}
-    </div>
+    </div>-->
     <!-- Topbar End -->
 
     
 
-    <!-- Navbar Start -->
+    <!-- Navbar Start 
     <div class="container-fluid mb-5">
        {% include 'baseapp/sidenavbar.html' %}
-    </div>
+    </div>-->
     <!-- Navbar End -->
 
     
-    <!-- Featured Start -->
-    <div class="container-fluid pt-5">
-        {% include 'baseapp/features.html' %}
-    </div>
-    <!-- Featured End -->
+    
 
     
 {% block content %}
 {% endblock %}
-    <!-- Footer Start -->
+    <!-- Footer Start
     <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
         {% include 'baseapp/footer.html' %}
-    </div>
+    </div>  -->
     <!-- Footer End -->
 
 
@@ -62,14 +59,14 @@
 
 
     <!-- JavaScript Libraries -->
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'lib/easing/easing.min.js' %} "></script>
-    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %} "></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js' %} "></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js' %} "></script>
 
     <!-- Contact Javascript File -->
     <script src="{% static 'mail/jqBootstrapValidation.min.js' %} "></script>
-    <script src="{% static 'mail/contact.js' %} "></script>
+    <script src="{% static 'mail/contact.' %} "></script>
 
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %} "></script>
