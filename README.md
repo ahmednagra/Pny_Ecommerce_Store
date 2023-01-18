@@ -4,8 +4,8 @@
 
 The goal of this project is to provide Ecomeerece Solution. Am working time to time and add further functionalities with time.
 
-![Default Home View](__screenshots/1.png))
-(__screenshots/2.png)
+![Default Home View](__screenshots/1.png),
+(__screenshots/2.png))
 
 ### Main features
 
