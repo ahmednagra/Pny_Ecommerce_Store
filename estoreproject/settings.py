@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'store',
+    'category',
     'baseapp',
     "crispy_forms",
     "crispy_bootstrap5",    
@@ -69,6 +71,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+                'category.context_processors.menu_links',
             ],
         },
     },
@@ -76,6 +80,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'estoreproject.wsgi.application'
 
+#tell the setting we are going to use System user Model
+#here users mean appp and AccountModel is defined Model
+AUTH_USER_MODEL = 'users.AccountModel'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -123,13 +130,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 #is se jo app k andr stattic folder hai us se data access ho ga
 STATIC_URL = 'static/'
-
+STATIC_ROOT= BASE_DIR /'static'
+STATICFILES_DIRS = [
+    'baseapp/static',
+    
+]
 
 #aur ab dynamically data laina hai databse se uski configuratio
 # Base url to serve media files
 #yaha dummy url day gay 
 
-MEDIA_URL = 'pictures/'
+MEDIA_URL = 'media/'
 
 # Path where media is stored
 MEDIA_ROOT = BASE_DIR

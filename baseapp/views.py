@@ -1,26 +1,24 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from baseapp.models.category import Category
-from baseapp.models.Products import Products
+from category.models import Category
+from store.models import Product
 from baseapp.models.subcategory import SubCategory
 # Create your views here.
 def index(request):
     id=request.GET.get("id")
     if id:
-        prod = Products.get_all__products__id(id)
+        prod = Product.get_all__products__id(id)
     else:
-        prod = Products.get_all__products(request)
+        prod = Product.get_all__products(request).filter(is_available=True)
     #method 1 data load
     ctrs=Category.objects.all()
-    subcat = SubCategory.objects.all()
-#method 2 with static method
-#ye data staticmethod se laykr aay hai aur static method product mldel mein define kiya hai
+    #subcat = SubCategory.objects.all()
     
     print(prod)
     context = {
-        "subcat":subcat,
+        #"subcat":subcat,
         "category": ctrs,
-        "products": prod
+        "products": prod,
     }
     return render(request, 'baseapp/index.html', context)
 

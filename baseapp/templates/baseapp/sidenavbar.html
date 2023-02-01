@@ -7,16 +7,17 @@
                 </a>
                 <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                        <div class="nav-item dropdown">
+                        <!--  <div class="nav-item dropdown">
                             <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                {% for sctr in subcat%} 
                                 <a href="/?id={{sctr.id}}" class="dropdown-item">{{sctr.SubCategory}}</a>
                                 {% endfor%} 
                             </div>
-                        </div> 
-                        {% for ctr in category%}
-                          <a href="/?id={{ctr.id}}" class="nav-item nav-link">{{ctr.name}}</a>
+                        </div>  -->
+                        <!--ye context processor call kiya hai -->
+                        {% for ctr in links %}
+                          <a href="/?id={{ctr.id}}" class="nav-item nav-link">{{ctr.category_name}}</a>
                        {% endfor%} 
                     </div>
                 </nav>
@@ -31,9 +32,9 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="shop.html" class="nav-item nav-link">Shop</a>
-                            <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
+                            <a href="{% url 'homepage' %}" class="nav-item nav-link active">Home</a>
+                            <a href="{% url 'store_homepage' %}" class="nav-item nav-link">Store</a>
+                            <a href="{% url 'store_detailpage' %}" class="nav-item nav-link">Store Detail</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded-0 m-0">

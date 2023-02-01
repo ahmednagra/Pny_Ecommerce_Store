@@ -1,8 +1,16 @@
 from django.contrib import admin
-from .models.category import Category
-from .models.Products import Products
 from .models.subcategory import SubCategory
 # Register your models here.
-admin.site.register(Category)
-admin.site.register(Products)
+
+
+#admin.site.register(Category)
+
 admin.site.register(SubCategory)
+
+
+"""
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('product_name', 'slug', 'category','description', 'price', 'image', 'stock', 'is_available', 'created_at', 'modified_date')
+    prepopulated_fields = {'slug':('product_name',)}
+"""
