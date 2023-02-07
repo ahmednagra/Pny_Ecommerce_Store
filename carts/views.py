@@ -66,6 +66,8 @@ def remove_cart(request, product_id):
                 
 def cart(request, total=0, quantity=0, cart_items=None):
     try:
+        tax =0 
+        grand_total = 0
         # cart object by cart id
         cart = CartModel.objects.get(cart_id=_cart_id(request))
         # cart items looping to get total and quantity

@@ -4,6 +4,9 @@ from category.models import Category
 from carts.models import CartItem
 #import _cart_id function
 from carts.views import _cart_id
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models import Q
+
 # Create your views here.
 
 
@@ -13,16 +16,31 @@ def store(request, category_slug=None):
     
     if category_slug !=None:
         category = get_object_or_404(Category, slug=category_slug)
-        products = Product.objects.filter(category=category, is_available=True)
+        products = Product.objects.filter(category=category, is_available=True).order_by('id')
+        # Create a Paginator with the queryset
+        paginator = Paginator(products, 6)
+        # Get the page number from the request
+        page_number = request.GET.get('page')
+        # Get the requested page from the paginator
+        page_product = paginator.get_page(page_number)
+
         product_count = products.count()
     else:        
-        products= Product.objects.all().filter(is_available=True)
+        products= Product.objects.all().filter(is_available=True).order_by('id')
+        # Create a Paginator with the queryset
+        paginator = Paginator(products, 6)
+        # Get the page number from the request
+        page_number = request.GET.get('page')
+        # Get the requested page from the paginator
+        page_product = paginator.get_page(page_number)
+    
         product_count = products.count()
         category = Category.objects.all()
     context = {
-        'products': products,
+        'products': page_product,
         'product_count': product_count,
         'category ': category,
+        
     }
     return render(request, 'store/store.html', context)
 
@@ -55,3 +73,20 @@ def product_detail(request, category_slug, product_slug):
     }
         
     return render(request, 'store/product_detail.html', context)
+
+
+def search(request):
+    #agr keyword get request meinho to us ko variable mein save kr liya
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+    if keyword:
+        products = Product.objects.order_by(
+            '-created_at').filter(Q(description__contains=keyword) | Q(product_name__contains=keyword))
+        product_count = products.count()
+    else:
+        products = Product.objects.all()
+    context = {
+        'products': products,
+        'product_count': product_count,
+    }
+    return render(request, 'store/store.html', context)
