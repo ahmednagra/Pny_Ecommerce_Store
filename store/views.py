@@ -1,6 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponse
 from .models import Product
 from category.models import Category
+from carts.models import CartItem
+#import _cart_id function
+from carts.views import _cart_id
 # Create your views here.
 
 
@@ -38,13 +41,17 @@ def storedetail(request):
 def product_detail(request, category_slug, product_slug):
     try:
             # category__slug is syntax to get slug field of the category
-        single_product = Product.objects.get(
-            category__slug=category_slug, slug=product_slug)
+        single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
+        #if this particular product exist or not in cart 
+        # here cart__  is the foreignkey of CartItem Model for CartModel
+        #first access cart field in CartItem then with fori=eign key get cartid from Cart model
+        in_cart= CartItem.objects.filter(cart__cart_id=_cart_id(request), product=single_product).exists()       
     except Exception as e:
         raise e
     
     context = {
         'single_product': single_product,
+        'in_cart' : in_cart,
     }
         
     return render(request, 'store/product_detail.html', context)
