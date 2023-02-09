@@ -49,3 +49,7 @@ def Login(request):
 			messages.info(request, f'account done not exit plz sign in')
 	form = AuthenticationForm()
 	return render(request, 'users/login.html', {'form':form})
+
+
+def logout(request):
+    return render(request, 'users/logout.html')

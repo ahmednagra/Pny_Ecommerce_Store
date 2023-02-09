@@ -10,8 +10,6 @@
 	{% else %}
 		<h2 class="title-page">Our Store</h2>
 	{% endif %}
-	
-	
 </div> <!-- container //  -->
 </section>
 <!-- ========================= SECTION INTRO END// ========================= -->
@@ -22,7 +20,6 @@
 
 <div class="row">
 	<aside class="col-md-3">
-		
 <div class="card">
 	<article class="filter-group">
 		<header class="card-header">
@@ -133,26 +130,26 @@
   <!-- sect-Product  -->
 
   <div class="row">
-	{% if prodducts %}
+	{% if products %}
 		{% for prod in products %}
 		<div class="col-md-4">
-		<figure class="card card-product-grid">
-			<div class="img-wrap"> 
-			<a href="{{ prod.get_url }}" class="img-wrap">
-			<img src="{{prod.image.url}}"> </a>
-			
-			</div> <!-- img-wrap.// -->
-			<figcaption class="info-wrap">
-			<div class="fix-height">
-				<a href="{{ prod.get_url }}" class="title">{{ prod.product_name }}</a>
-				<div class="price-wrap mt-2">
-				<span class="price">{{ prod.price }} $ </span>
-				<del class="price-old">$1980</del>
-				</div> <!-- price-wrap.// -->
-			</div>
-			<a href="{{ prod.get_url }}" class="btn btn-block btn-primary">View Detail </a>
-			</figcaption>
-		</figure>
+			<figure class="card card-product-grid">
+				<div class="img-wrap"> 
+				<a href="{{ prod.get_url }}" class="img-wrap">
+				<img src="{{prod.image.url}}"> </a>
+				
+				</div> <!-- img-wrap.// -->
+				<figcaption class="info-wrap">
+				<div class="fix-height">
+					<a href="{{ prod.get_url }}" class="title">{{ prod.product_name }}</a>
+					<div class="price-wrap mt-2">
+					<span class="price">{{ prod.price }} $ </span>
+					<del class="price-old">$1980</del>
+					</div> <!-- price-wrap.// -->
+				</div>
+				<a href="{{ prod.get_url }}" class="btn btn-block btn-primary">View Detail </a>
+				</figcaption>
+			</figure>
 		</div> <!-- col.// -->
 		{% endfor %}
 	{% else %}

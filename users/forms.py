@@ -3,14 +3,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 
-
+#bcs usercreationform come with 3 field username, password1 and password2
 class UserRegisterForm(UserCreationForm):
 	email = forms.EmailField()
 	phone_no = forms.CharField(max_length = 20)
 	first_name = forms.CharField(max_length = 20)
 	last_name = forms.CharField(max_length = 20)
-	username = forms.CharField( max_length=50)
-	phone_no = forms.IntegerField(max_value=15)
+	#username = forms.CharField( max_length=50)
 	class Meta:
 		model = User
 		fields = ['first_name','last_name','username', 'email', 'phone_no', 'password1', 'password2']

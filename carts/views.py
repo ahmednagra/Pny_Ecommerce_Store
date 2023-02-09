@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from store.models import Product
+from store.models import Product, VariationModel
 from carts.models import CartItem, CartModel
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -15,7 +15,24 @@ def _cart_id(request):
         
         #add item in cart withoutlogin from session key
 def add_cart(request, product_id):
+    #color mean in form name = "value"
+    color = request.GET['color']
+    size= request.GET['size']
+    print(color)
     product = Product.objects.get(id=product_id) #get product by id
+    #variation color and size
+   # if request.method == 'POST':
+        #for item in request.POST:
+        #    key =item
+       #     value = request.POST[key]
+            
+      #      try:
+     #           variation = VariationModel.objects.get(product=product, variation_category__iexact=key, variation_category__iexact=value)
+    #            product_variation.append(variation)
+   #         except:
+  #              pass    
+    
+    product_variation= []
     
     try:
         # yaha id session se li gai hai
